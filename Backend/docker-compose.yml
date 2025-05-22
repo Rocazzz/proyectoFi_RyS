@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
+
+  usuario:
+    build: ./usuario
+    container_name: usuario
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - MONGODB_URI=mongodb://mongo:27017/usuariosDB
+    depends_on:
+      - mongo
+
+  carrito:
+    build: ./carrito
+    container_name: carrito
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT=3002
+      - MONGODB_URI=mongodb://mongo:27017/carritoDB
+      - USERS_SERVICE_URL=http://usuario:3000/api/users
+    depends_on:
+      - usuario
+      - mongo

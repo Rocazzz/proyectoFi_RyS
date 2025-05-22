@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro de Método de Pago</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h2>Pasarela de Pagos</h2>
+
+  <form id="formularioPago">
+    <label for="cliente_id">ID Cliente:</label>
+    <input type="number" id="cliente_id" required>
+
+    <label for="tipo">Tipo de Pago:</label>
+    <select id="tipo" required onchange="mostrarCampos()">
+      <option value="">Seleccione uno</option>
+      <option value="tarjeta">Tarjeta</option>
+      <option value="pse">PSE</option>
+      <option value="nequi">Nequi</option>
+    </select>
+
+    <div id="campo-tarjeta" class="hidden">
+      <label for="numeroTarjeta">Número de Tarjeta:</label>
+      <input type="text" id="numeroTarjeta" maxlength="16" />
+
+      <label for="expiracionTarjeta">Expiración (MM/YY):</label>
+      <input type="text" id="expiracionTarjeta" placeholder="MM/YY" />
+    </div>
+
+    <div id="campo-pse" class="hidden">
+      <label for="correoPSE">Correo electrónico:</label>
+      <input type="email" id="correoPSE" />
+    </div>
+
+    <div id="campo-nequi" class="hidden">
+      <label for="numeroNequi">Número de celular:</label>
+      <input type="text" id="numeroNequi" maxlength="10" />
+    </div>
+
+    </div>
+
+    <div>
+      <input type="checkbox" id="guardarMetodo">
+      <label for="guardarMetodo">Guardar este método para futuras ocasiones</label>
+    </div>
+
+    <button type="submit">Realizar Pago</button>
+  </form>
+
+  </form>
+
+  <div class="respuesta" id="respuesta"></div>
+
+  <script src="script.js"></script>
+
+  <h2>Consultar y eliminar métodos de pago</h2>
+  <label for="consulta_cliente_id">ID Cliente:</label>
+  <input type="number" id="consulta_cliente_id">
+  <button onclick="consultarMetodos()">Consultar métodos</button>
+
+  <div id="resultados"></div>
+</body>
+</html>
